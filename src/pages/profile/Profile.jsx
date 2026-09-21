@@ -1,9 +1,7 @@
+import PagePlaceholder from '../../components/common/PagePlaceholder'
+
 function Profile() {
-  return (
-    <div className="flex min-h-screen items-center justify-center">
-      <h1 className="text-2xl font-semibold text-slate-800">Profile</h1>
-    </div>
-  )
+  return <PagePlaceholder title="Profile" note="Profile content will be implemented next." />
 }
 
 export default Profile

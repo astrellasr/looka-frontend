@@ -1,9 +1,7 @@
+import PagePlaceholder from '../../components/common/PagePlaceholder'
+
 function Calendar() {
-  return (
-    <div className="flex min-h-screen items-center justify-center">
-      <h1 className="text-2xl font-semibold text-slate-800">Calendar</h1>
-    </div>
-  )
+  return <PagePlaceholder title="Calendar" note="Calendar content will be implemented next." />
 }
 
 export default Calendar

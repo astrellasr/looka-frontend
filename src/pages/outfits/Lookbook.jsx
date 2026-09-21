@@ -1,9 +1,7 @@
+import PagePlaceholder from '../../components/common/PagePlaceholder'
+
 function Lookbook() {
-  return (
-    <div className="flex min-h-screen items-center justify-center">
-      <h1 className="text-2xl font-semibold text-slate-800">Lookbook</h1>
-    </div>
-  )
+  return <PagePlaceholder title="Lookbook" note="Lookbook content will be implemented next." />
 }
 
 export default Lookbook

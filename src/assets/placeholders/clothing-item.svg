@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 360" role="img" aria-label="Clothing photo placeholder">
+  <!-- Neutral line illustration standing in for a garment photo.
+       Replaced by the real image URL during API integration. -->
+  <g fill="none" stroke="#c9c0bb" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M118 46 96 58 58 84l22 44 30-16v162a8 8 0 0 0 8 8h84a8 8 0 0 0 8-8V112l30 16 22-44-38-26-22-12" fill="#ffffff"/>
+    <path d="M118 46c0 22 18 34 42 34s42-12 42-34"/>
+    <path d="M136 52c6 14 14 22 24 22s18-8 24-22"/>
+  </g>
+  <g fill="none" stroke="#ded6d0" stroke-width="2" stroke-linecap="round">
+    <path d="M132 112v150M148 112v150M164 112v150M180 112v150M196 112v150"/>
+  </g>
+</svg>
