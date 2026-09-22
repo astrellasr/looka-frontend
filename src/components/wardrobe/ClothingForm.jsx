@@ -99,6 +99,8 @@ export function FormActions({
   note,
   submitLabel = 'Add to Wardrobe',
   submitIcon: SubmitIcon = HangerIcon,
+  submitting = false,
+  submittingLabel = 'Saving...',
 }) {
   return (
     <div className="mt-8">
@@ -112,10 +114,12 @@ export function FormActions({
 
         <button
           type="submit"
-          className="inline-flex h-11 items-center justify-center gap-2 rounded-control bg-primary px-6 text-body font-medium text-white transition-colors duration-150 hover:bg-primary-strong"
+          disabled={submitting}
+          aria-busy={submitting}
+          className="inline-flex h-11 items-center justify-center gap-2 rounded-control bg-primary px-6 text-body font-medium text-white transition-colors duration-150 hover:bg-primary-strong disabled:cursor-not-allowed disabled:bg-primary/55 disabled:hover:bg-primary/55"
         >
           <SubmitIcon className="h-4 w-4" aria-hidden="true" />
-          {submitLabel}
+          {submitting ? submittingLabel : submitLabel}
         </button>
       </div>
 

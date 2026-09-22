@@ -260,3 +260,72 @@ export function StarIcon(props) {
     </Svg>
   )
 }
+
+export function GridIcon(props) {
+  return (
+    <Svg {...props}>
+      <rect x="4.2" y="4.2" width="6.3" height="6.3" rx="1.4" />
+      <rect x="13.5" y="4.2" width="6.3" height="6.3" rx="1.4" />
+      <rect x="4.2" y="13.5" width="6.3" height="6.3" rx="1.4" />
+      <rect x="13.5" y="13.5" width="6.3" height="6.3" rx="1.4" />
+    </Svg>
+  )
+}
+
+export function EyeIcon(props) {
+  return (
+    <Svg {...props}>
+      <path d="M2.4 12s3.6-6.6 9.6-6.6S21.6 12 21.6 12s-3.6 6.6-9.6 6.6S2.4 12 2.4 12Z" />
+      <circle cx="12" cy="12" r="2.7" />
+    </Svg>
+  )
+}
+
+export function EyeOffIcon(props) {
+  return (
+    <Svg {...props}>
+      <path d="M9.9 5.7a7.9 7.9 0 0 1 2.1-.3c6 0 9.6 6.6 9.6 6.6a16 16 0 0 1-2.4 3.3" />
+      <path d="M6.3 7.5A15.8 15.8 0 0 0 2.4 12s3.6 6.6 9.6 6.6a8.6 8.6 0 0 0 3.6-.78" />
+      <path d="M10.1 10.1a2.7 2.7 0 0 0 3.8 3.8" />
+      <path d="m4.2 4.2 15.6 15.6" />
+    </Svg>
+  )
+}
+
+export function PaletteIcon(props) {
+  return (
+    <Svg {...props}>
+      <path d="M12 3.6a8.4 8.4 0 0 0 0 16.8c.9 0 1.5-.7 1.5-1.5 0-.4-.15-.75-.4-1a1.45 1.45 0 0 1 1.05-2.5h1.75a4.5 4.5 0 0 0 4.5-4.5c0-4-4.2-7.3-8.4-7.3Z" />
+      <circle cx="7.8" cy="11.4" r="1" />
+      <circle cx="11.4" cy="7.8" r="1" />
+      <circle cx="15.6" cy="9.6" r="1" />
+    </Svg>
+  )
+}
+
+export function MailIcon(props) {
+  return (
+    <Svg {...props}>
+      <rect x="3" y="5.4" width="18" height="13.2" rx="2.2" />
+      <path d="m3.6 7.2 7.35 5.06a1.85 1.85 0 0 0 2.1 0L20.4 7.2" />
+    </Svg>
+  )
+}
+
+export function LogoutIcon(props) {
+  return (
+    <Svg {...props}>
+      <path d="M14.4 7.2V5.7a1.5 1.5 0 0 0-1.5-1.5H5.7a1.5 1.5 0 0 0-1.5 1.5v12.6a1.5 1.5 0 0 0 1.5 1.5h7.2a1.5 1.5 0 0 0 1.5-1.5v-1.5" />
+      <path d="M9.6 12h10.2" />
+      <path d="m16.8 8.4 3.6 3.6-3.6 3.6" />
+    </Svg>
+  )
+}
+
+export function PencilIcon(props) {
+  return (
+    <Svg {...props}>
+      <path d="M16.5 4.8a2.05 2.05 0 0 1 2.9 2.9L8.4 18.7l-3.9 1 1-3.9L16.5 4.8Z" />
+    </Svg>
+  )
+}

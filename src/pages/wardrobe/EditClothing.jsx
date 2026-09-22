@@ -1,17 +1,31 @@
-import { Link, useParams } from 'react-router-dom'
+import { useState } from 'react'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import ClothingImageUpload from '../../components/wardrobe/ClothingImageUpload'
 import ClothingForm, { FormActions } from '../../components/wardrobe/ClothingForm'
 import { HeartMarkSmall } from '../../components/dashboard/GreetingHeart'
 import { ArrowLeftIcon, InfoIcon, CheckIcon } from '../../components/common/Icons'
 import { useClothingForm } from '../../hooks/useClothingForm'
+import { usePreviewData } from '../../hooks/usePreviewData'
 import { previewEditItem } from '../../utils/previewData'
 
-const SYNC_NOTE = 'Changes will be saved once wardrobe sync is connected.'
+// Preview mode holds items in memory only -- the wording says so rather
+// than implying the server stored anything.
+const SYNC_NOTE = 'Updated in your preview wardrobe. Not yet saved to a server.'
 
 function EditClothing() {
   // The id is read but not fetched -- GET /clothes/:id arrives with
   // API integration and will supply these initial values.
-  useParams()
+  const { id } = useParams()
+  const { findClothing, updateClothing } = usePreviewData()
+  const navigate = useNavigate()
+
+  // The real item from the shared store; falls back to the sample so a
+  // hand-typed id still renders something coherent in preview mode.
+  const existing = findClothing(id)
+  const source = existing ?? {
+    ...previewEditItem.values,
+    imageUrl: previewEditItem.photoUrl,
+  }
 
   const {
     values,
@@ -23,13 +37,42 @@ function EditClothing() {
     removePhoto,
     validate,
   } = useClothingForm({
-    initialValues: previewEditItem.values,
-    initialPhoto: { url: previewEditItem.photoUrl },
+    initialValues: {
+      name: source.name ?? '',
+      category: source.category ?? '',
+      color: source.color ?? '',
+      style: source.style ?? '',
+      occasion: source.occasion ?? '',
+      weather: source.weather ?? '',
+    },
+    initialPhoto: {
+      url: source.imageUrl ?? previewEditItem.photoUrl,
+    },
   })
+
+  // Guards the submit button. Preview mode resolves immediately; the
+  // same flag covers the await once PUT /clothes/:id is wired in.
+  const [submitting, setSubmitting] = useState(false)
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    validate()
+    if (submitting) return
+    if (!validate()) return
+
+    setSubmitting(true)
+
+    // Preview mode has nothing to await, so the save is committed on the
+    // next frame: the submitting label actually paints, and the guard
+    // above blocks a second submit in between. When the real request
+    // lands this becomes `await`, and the structure is unchanged.
+    window.requestAnimationFrame(() => {
+      // Local only. Replaced by PUT /clothes/:id.
+      if (existing) {
+        updateClothing(existing.id, { ...values, imageUrl: photo?.url })
+      }
+
+      navigate('/wardrobe')
+    })
   }
 
   return (
@@ -87,6 +130,8 @@ function EditClothing() {
               note={SYNC_NOTE}
               submitLabel="Save Changes"
               submitIcon={CheckIcon}
+              submitting={submitting}
+              submittingLabel="Saving..."
             />
 
             <div aria-live="polite">

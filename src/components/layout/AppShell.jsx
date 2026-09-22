@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 import Sidebar from './Sidebar'
 import TopBar from './TopBar'
 import MobileBottomNav from './MobileBottomNav'
+import { useAuth } from '../../hooks/useAuth'
+import LogoutConfirmModal from './LogoutConfirmModal'
 
 const STORAGE_KEY = 'looka:sidebar-collapsed'
 
@@ -30,6 +32,19 @@ function AppShell() {
     }
   }, [collapsed])
 
+  const { user, avatarUrl, logout } = useAuth()
+  const navigate = useNavigate()
+
+  // Logout is confirmed first; the same flow serves preview and real
+  // mode, since logout() already branches internally.
+  const [confirmingLogout, setConfirmingLogout] = useState(false)
+
+  const handleConfirmLogout = () => {
+    setConfirmingLogout(false)
+    logout()
+    navigate('/login', { replace: true })
+  }
+
   return (
     <div className="flex min-h-screen overflow-x-clip bg-canvas">
       {/* Width lives here so the sidebar and its reserved space animate as
@@ -42,6 +57,9 @@ function AppShell() {
         <Sidebar
           collapsed={collapsed}
           onToggle={() => setCollapsed((v) => !v)}
+          user={user}
+          avatarUrl={avatarUrl}
+          onLogout={() => setConfirmingLogout(true)}
         />
       </div>
 
@@ -57,6 +75,13 @@ function AppShell() {
       </div>
 
       <MobileBottomNav />
+
+      {confirmingLogout && (
+        <LogoutConfirmModal
+          onCancel={() => setConfirmingLogout(false)}
+          onConfirm={handleConfirmLogout}
+        />
+      )}
     </div>
   )
 }

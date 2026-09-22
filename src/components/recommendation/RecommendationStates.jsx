@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import LucaAvatar from '../common/LucaAvatar'
 import { HeartMarkSmall } from '../dashboard/GreetingHeart'
 import { PlusIcon } from '../common/Icons'
+import lucaIdleUrl from '../../assets/mascots/luca-recommendation-idle.png'
 
 /** Shared shell so every state sits in the same frame. */
 function StatePanel({ children }) {
@@ -78,7 +79,15 @@ export function RecommendationError({ onRetry }) {
 export function RecommendationIdle() {
   return (
     <StatePanel>
-      <LucaAvatar size="lg" floating />
+      {/* Width only + h-auto keeps the artwork in proportion; the PNG is
+          transparent, so it sits on the card with no container. The small
+          negative margins absorb the artwork's own empty padding, so the
+          larger mascot does not push the card taller. */}
+      <img
+        src={lucaIdleUrl}
+        alt="Luca ready to help you find a look"
+        className="-my-4 h-auto w-[250px] max-w-full select-none sm:-my-5 sm:w-[300px] lg:-my-6 lg:w-[350px]"
+      />
       <p className="mt-6 text-section">Your look starts here</p>
       <p className="mt-1.5 text-body text-ink-soft">
         Pick an occasion above and Luca will put a look together from your

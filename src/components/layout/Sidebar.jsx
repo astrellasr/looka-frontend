@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom'
 import Brand from '../common/Brand'
 import SidebarToggle from './SidebarToggle'
+import { LogoutIcon, UserIcon } from '../common/Icons'
 import { mainNav, secondaryNav } from './navItems'
 
 function SidebarLink({ item, collapsed }) {
@@ -52,7 +53,7 @@ function SidebarLink({ item, collapsed }) {
  * Width is driven by the parent grid in AppShell; this component only
  * decides what to show at each state.
  */
-function Sidebar({ collapsed, onToggle }) {
+function Sidebar({ collapsed, onToggle, user, avatarUrl, onLogout }) {
   return (
     <aside className="hidden h-screen flex-col border-r border-line bg-canvas lg:flex">
       {/* Brand, then the toggle on its own row so it never crowds
@@ -69,12 +70,6 @@ function Sidebar({ collapsed, onToggle }) {
             variant={collapsed ? 'mark' : 'wordmark'}
             className={collapsed ? 'h-8 w-auto' : 'w-[135px]'}
           />
-
-          {!collapsed && (
-            <span className="mt-1.5 text-center text-[0.6875rem] font-normal tracking-[0.14em] text-ink-soft">
-              Style What You Own
-            </span>
-          )}
         </NavLink>
 
         <div className={`mt-5 flex ${collapsed ? 'justify-center' : 'justify-end'}`}>
@@ -104,19 +99,51 @@ function Sidebar({ collapsed, onToggle }) {
         <div
           className={`flex items-center ${collapsed ? 'justify-center' : 'gap-3'}`}
         >
-          <div className="h-9 w-9 shrink-0 rounded-full bg-surface-soft" />
+          <div className="flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full bg-surface-soft">
+            {avatarUrl ? (
+              <img src={avatarUrl} alt="" className="h-full w-full object-cover" />
+            ) : (
+              <UserIcon className="h-4 w-4 text-ink-muted" aria-hidden="true" />
+            )}
+          </div>
 
           {!collapsed && (
-            <div className="min-w-0">
+            <div className="min-w-0 flex-1">
               <p className="truncate text-secondary font-medium text-ink">
-                Your profile
+                {user?.name ?? user?.username ?? 'Your profile'}
               </p>
-              <p className="truncate text-caption text-ink-muted">
-                Not signed in
-              </p>
+              {user?.username && (
+                <p className="truncate text-caption text-ink-muted">
+                  @{user.username}
+                </p>
+              )}
             </div>
           )}
+
+          {!collapsed && (
+            <button
+              type="button"
+              onClick={onLogout}
+              aria-label="Log out"
+              title="Log out"
+              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md text-ink-muted transition-colors duration-150 hover:bg-surface-soft hover:text-ink"
+            >
+              <LogoutIcon className="h-4 w-4" />
+            </button>
+          )}
         </div>
+
+        {collapsed && (
+          <button
+            type="button"
+            onClick={onLogout}
+            aria-label="Log out"
+            title="Log out"
+            className="mt-3 flex h-8 w-full items-center justify-center rounded-md text-ink-muted transition-colors duration-150 hover:bg-surface-soft hover:text-ink"
+          >
+            <LogoutIcon className="h-4 w-4" />
+          </button>
+        )}
       </div>
     </aside>
   )

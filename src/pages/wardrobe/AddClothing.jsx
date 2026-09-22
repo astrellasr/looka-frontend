@@ -1,11 +1,15 @@
-import { Link } from 'react-router-dom'
+import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import ClothingImageUpload from '../../components/wardrobe/ClothingImageUpload'
 import ClothingForm, { FormActions } from '../../components/wardrobe/ClothingForm'
 import { HeartMarkSmall } from '../../components/dashboard/GreetingHeart'
 import { ArrowLeftIcon, InfoIcon } from '../../components/common/Icons'
 import { useClothingForm } from '../../hooks/useClothingForm'
+import { usePreviewData } from '../../hooks/usePreviewData'
 
-const SYNC_NOTE = 'This will be saved once wardrobe sync is connected.'
+// Preview mode holds items in memory only -- the wording says so rather
+// than implying the server stored anything.
+const SYNC_NOTE = 'Added to your preview wardrobe. Not yet saved to a server.'
 
 function AddClothing() {
   const {
@@ -19,9 +23,36 @@ function AddClothing() {
     validate,
   } = useClothingForm()
 
+  const { addClothing } = usePreviewData()
+  const navigate = useNavigate()
+
+  // Guards the submit button. Preview mode resolves immediately; the
+  // same flag covers the await once POST /clothes is wired in.
+  const [submitting, setSubmitting] = useState(false)
+
   const handleSubmit = (event) => {
     event.preventDefault()
-    validate()
+    if (submitting) return
+    if (!validate()) return
+
+    setSubmitting(true)
+
+    // Preview mode has nothing to await, so the save is committed on the
+    // next frame: the submitting label actually paints, and the guard
+    // above blocks a second submit in between. When the real request
+    // lands this becomes `await`, and the structure is unchanged.
+    window.requestAnimationFrame(() => {
+      // Local only: the item joins the shared preview store so it shows
+      // up in the wardrobe. Replaced by POST /clothes.
+      addClothing({
+        ...values,
+        imageUrl: photo?.url,
+        favorite: false,
+        accent: 'sand',
+      })
+
+      navigate('/wardrobe')
+    })
   }
 
   return (
@@ -75,7 +106,11 @@ function AddClothing() {
               onChange={handleChange}
             />
 
-            <FormActions note={SYNC_NOTE} />
+            <FormActions
+              note={SYNC_NOTE}
+              submitting={submitting}
+              submittingLabel="Adding..."
+            />
 
             {/* Success is informational only -- never claims a save. */}
             <div aria-live="polite">

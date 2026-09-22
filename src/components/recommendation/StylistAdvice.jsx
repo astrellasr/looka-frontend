@@ -1,5 +1,5 @@
-import LucaAvatar from '../common/LucaAvatar'
 import { SparkleIcon, SunIcon, HangerIcon, StarIcon } from '../common/Icons'
+import lucaStyleNoteUrl from '../../assets/mascots/luca-style-note.png'
 
 /**
  * Luca's styling note and the supporting reasons.
@@ -30,7 +30,13 @@ function StylistAdvice({ note, reasons = [] }) {
 
       {note && (
         <div className="mt-5 flex items-start gap-3">
-          <LucaAvatar size="sm" />
+          {/* Width only + h-auto and object-contain keep the artwork in
+              proportion; the PNG is transparent, so no container. */}
+          <img
+            src={lucaStyleNoteUrl}
+            alt="Luca sharing a styling note"
+            className="h-auto w-[72px] shrink-0 select-none object-contain sm:w-[84px]"
+          />
           <p className="min-w-0 flex-1 rounded-card rounded-tl-sm bg-blush/18 px-4 py-3 text-secondary leading-relaxed text-ink">
             {note}
           </p>

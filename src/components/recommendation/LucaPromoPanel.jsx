@@ -1,10 +1,10 @@
-import LucaAvatar from '../common/LucaAvatar'
 import { HeartMarkSmall } from '../dashboard/GreetingHeart'
+import lucaStoriesUrl from '../../assets/mascots/luca-recommendation-stories.png'
 
 /**
- * Editorial promo panel. No photography exists yet, so the wardrobe
- * imagery is suggested with soft CSS shapes -- a hanging rail and a
- * couple of polaroid-style cards -- rather than stock images.
+ * Editorial promo panel: copy and Luca on the left, a suggested
+ * wardrobe rail in soft CSS shapes on the right (no photography exists
+ * yet, so nothing is stock imagery).
  */
 function LucaPromoPanel() {
   return (
@@ -26,9 +26,14 @@ function LucaPromoPanel() {
           <HeartMarkSmall className="mt-1 h-3.5 w-3.5" />
         </p>
 
-        <div className="mt-6">
-          <LucaAvatar size="lg" floating />
-        </div>
+        {/* Luca sits below the copy in the lower-left of the card, above
+            the background but clear of the decorative rail on the right.
+            Width only + h-auto keeps the artwork in proportion. */}
+        <img
+          src={lucaStoriesUrl}
+          alt="Luca carrying clothes for new outfit ideas"
+          className="mt-6 h-auto w-[150px] max-w-full select-none sm:w-[136px] lg:w-[184px]"
+        />
       </div>
 
       {/* Suggested wardrobe rail -- decorative only. */}

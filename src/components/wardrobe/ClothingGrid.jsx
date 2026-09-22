@@ -8,7 +8,13 @@ import ClothingCard from './ClothingCard'
  * later. `emptyVariant` distinguishes a genuinely empty wardrobe from a
  * search that matched nothing, since the two need different wording.
  */
-function ClothingGrid({ items = [], onToggleFavorite, emptyVariant = 'wardrobe' }) {
+function ClothingGrid({
+  items = [],
+  onToggleFavorite,
+  onEdit,
+  onDelete,
+  emptyVariant = 'wardrobe',
+}) {
   if (items.length === 0) {
     const isSearch = emptyVariant === 'search'
 
@@ -44,6 +50,8 @@ function ClothingGrid({ items = [], onToggleFavorite, emptyVariant = 'wardrobe' 
           key={item.id}
           item={item}
           onToggleFavorite={onToggleFavorite}
+          onEdit={onEdit}
+          onDelete={onDelete}
         />
       ))}
     </div>

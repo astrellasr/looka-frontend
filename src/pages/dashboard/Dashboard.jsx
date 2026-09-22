@@ -6,12 +6,9 @@ import { HeartMarkSmall } from '../../components/dashboard/GreetingHeart'
 
 // Temporary presentation values. See src/utils/previewData.js --
 // every one of these is replaced by backend data during API integration.
-import {
-  previewUser,
-  previewWeather,
-  previewCounts,
-  previewRecentLooks,
-} from '../../utils/previewData'
+import { previewWeather } from '../../utils/previewData'
+import { useAuth } from '../../hooks/useAuth'
+import { usePreviewData } from '../../hooks/usePreviewData'
 
 function formatToday() {
   return new Date().toLocaleDateString(undefined, {
@@ -23,6 +20,20 @@ function formatToday() {
 }
 
 function Dashboard() {
+  // Counts and recent looks track the shared preview store, so adding a
+  // clothing item or saving a look is reflected here immediately.
+  const { user } = useAuth()
+  const { clothes, looks, calendar } = usePreviewData()
+
+  const counts = {
+    wardrobeItems: clothes.length,
+    savedLooks: looks.length,
+    daysStyled: Object.keys(calendar).length,
+  }
+
+  const recentLooks = looks.slice(0, 4)
+  const firstName = user?.username ?? user?.name ?? 'there'
+
   return (
     <div className="space-y-10">
       {/* Greeting + context */}
@@ -30,7 +41,7 @@ function Dashboard() {
         <div className="min-w-0">
           <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
             <h1 className="flex items-center gap-2 text-page md:text-[2rem]">
-              Hi, {previewUser.firstName}!
+              Hi, {firstName}!
               <HeartMarkSmall />
             </h1>
             <p className="text-secondary text-ink-muted">{formatToday()}</p>
@@ -51,9 +62,9 @@ function Dashboard() {
         </div>
       </section>
 
-      <QuickAccess counts={previewCounts} />
+      <QuickAccess counts={counts} />
 
-      <RecentLooks looks={previewRecentLooks} />
+      <RecentLooks looks={recentLooks} />
 
       {/* Light closing note -- no charts, no analytics. */}
       <p className="flex items-center justify-center gap-2 pt-2 text-secondary text-ink-muted">

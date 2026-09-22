@@ -1,4 +1,4 @@
-import { HeartIcon, HeartFilledIcon } from '../common/Icons'
+import { HeartIcon, HeartFilledIcon, PencilIcon, TrashIcon } from '../common/Icons'
 
 /**
  * A single wardrobe item.
@@ -19,7 +19,7 @@ const ACCENTS = {
   sage: 'from-sage/35 to-powder/25',
 }
 
-function ClothingCard({ item, onToggleFavorite }) {
+function ClothingCard({ item, onToggleFavorite, onEdit, onDelete }) {
   const favorite = Boolean(item.favorite)
 
   return (
@@ -55,6 +55,34 @@ function ClothingCard({ item, onToggleFavorite }) {
           {item.category}
           {item.style ? ` · ${item.style}` : ''}
         </p>
+
+        {(onEdit || onDelete) && (
+          <div className="mt-2.5 flex items-center gap-1 opacity-0 transition-opacity duration-150 group-hover:opacity-100 group-focus-within:opacity-100">
+            {onEdit && (
+              <button
+                type="button"
+                onClick={() => onEdit(item.id)}
+                aria-label={`Edit ${item.name}`}
+                className="inline-flex items-center gap-1.5 rounded-md px-2 py-1 text-caption text-ink-soft transition-colors duration-150 hover:bg-surface-soft hover:text-ink"
+              >
+                <PencilIcon className="h-3.5 w-3.5" aria-hidden="true" />
+                Edit
+              </button>
+            )}
+
+            {onDelete && (
+              <button
+                type="button"
+                onClick={() => onDelete(item.id)}
+                aria-label={`Remove ${item.name} from your wardrobe`}
+                className="inline-flex items-center gap-1.5 rounded-md px-2 py-1 text-caption text-ink-soft transition-colors duration-150 hover:bg-error/10 hover:text-error"
+              >
+                <TrashIcon className="h-3.5 w-3.5" aria-hidden="true" />
+                Remove
+              </button>
+            )}
+          </div>
+        )}
       </div>
     </article>
   )
