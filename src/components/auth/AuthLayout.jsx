@@ -37,7 +37,7 @@ function AuthLayout({ headline, supporting, children }) {
       </section>
 
       <section className="flex w-full flex-col justify-center px-5 py-12 sm:px-10 lg:w-1/2 lg:px-12">
-        <div className="mx-auto w-full max-w-[26rem]">
+        <div className="animate-rise-in mx-auto w-full max-w-[26rem]">
           <div className="mb-8 flex justify-center lg:hidden">
             <Brand variant="wordmark" className="w-[150px] max-w-full" />
           </div>

@@ -66,7 +66,7 @@ function RecentLooks({ looks = [] }) {
           </p>
         </div>
       ) : (
-        <div className="grid max-w-lg grid-cols-2 gap-4 lg:max-w-none lg:grid-cols-4">
+        <div className="stagger grid max-w-lg grid-cols-2 gap-4 lg:max-w-none lg:grid-cols-4">
           {looks.map((look) => (
             <LookCard key={look.id} look={look} />
           ))}

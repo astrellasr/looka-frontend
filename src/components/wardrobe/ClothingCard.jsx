@@ -23,9 +23,9 @@ function ClothingCard({ item, onToggleFavorite, onEdit, onDelete }) {
   const favorite = Boolean(item.favorite)
 
   return (
-    <article className="group overflow-hidden rounded-card border border-line bg-surface shadow-card transition duration-200 hover:shadow-raised">
+    <article className="group overflow-hidden rounded-card border border-line bg-surface shadow-card transition duration-200 hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-raised">
       <div
-        className={`relative aspect-square bg-gradient-to-br ${
+        className={`relative aspect-square overflow-hidden bg-gradient-to-br ${
           ACCENTS[item.accent] ?? ACCENTS.sand
         }`}
       >
@@ -39,7 +39,7 @@ function ClothingCard({ item, onToggleFavorite, onEdit, onDelete }) {
               ? `Remove ${item.name} from favourites`
               : `Add ${item.name} to favourites`
           }
-          className="absolute right-2.5 top-2.5 flex h-7 w-7 items-center justify-center rounded-full bg-surface/85 text-primary-strong transition-colors duration-150 hover:bg-surface hover:text-primary"
+          className="absolute right-2.5 top-2.5 z-10 flex h-7 w-7 items-center justify-center rounded-full bg-surface/85 text-primary-strong transition duration-150 hover:scale-110 hover:bg-surface hover:text-primary active:scale-95"
         >
           {favorite ? (
             <HeartFilledIcon className="h-3.5 w-3.5" />

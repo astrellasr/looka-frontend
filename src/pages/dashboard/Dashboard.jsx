@@ -3,6 +3,7 @@ import LucaGreeting from '../../components/dashboard/LucaGreeting'
 import QuickAccess from '../../components/dashboard/QuickAccess'
 import RecentLooks from '../../components/dashboard/RecentLooks'
 import { HeartMarkSmall } from '../../components/dashboard/GreetingHeart'
+import RevealOnScroll from '../../components/common/RevealOnScroll'
 
 // Temporary presentation values. See src/utils/previewData.js --
 // every one of these is replaced by backend data during API integration.
@@ -64,7 +65,9 @@ function Dashboard() {
 
       <QuickAccess counts={counts} />
 
-      <RecentLooks looks={recentLooks} />
+      <RevealOnScroll>
+        <RecentLooks looks={recentLooks} />
+      </RevealOnScroll>
 
       {/* Light closing note -- no charts, no analytics. */}
       <p className="flex items-center justify-center gap-2 pt-2 text-secondary text-ink-muted">

@@ -46,7 +46,7 @@ function OutfitDetailModal({ look, onClose, onToggleFavorite, onWearToday, onDel
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-end justify-center bg-ink/25 p-0 backdrop-blur-[2px] sm:items-center sm:p-6"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6"
       onMouseDown={(e) => {
         if (!panelRef.current?.contains(e.target)) onClose()
       }}
@@ -56,7 +56,7 @@ function OutfitDetailModal({ look, onClose, onToggleFavorite, onWearToday, onDel
         role="dialog"
         aria-modal="true"
         aria-labelledby="look-title"
-        className="max-h-[92vh] w-full overflow-y-auto rounded-t-card bg-surface shadow-raised sm:max-w-3xl sm:rounded-card"
+        className="animate-scale-in max-h-[92vh] w-full overflow-y-auto rounded-card border border-line bg-surface shadow-raised sm:max-w-3xl"
       >
         <div className="grid sm:grid-cols-[minmax(0,5fr)_minmax(0,6fr)]">
           <OutfitComposition

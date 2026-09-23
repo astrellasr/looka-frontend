@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Outlet, useNavigate } from 'react-router-dom'
+import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import Sidebar from './Sidebar'
 import TopBar from './TopBar'
 import MobileBottomNav from './MobileBottomNav'
@@ -34,6 +34,7 @@ function AppShell() {
 
   const { user, avatarUrl, logout } = useAuth()
   const navigate = useNavigate()
+  const location = useLocation()
 
   // Logout is confirmed first; the same flow serves preview and real
   // mode, since logout() already branches internally.
@@ -70,7 +71,11 @@ function AppShell() {
         {/* Left-aligned, not mx-auto: centering the max-width box pushed
             content further from the sidebar the wider the screen got. */}
         <main className="w-full max-w-[1280px] flex-1 px-4 pb-28 pt-8 sm:px-8 lg:px-12 lg:pb-16">
-          <Outlet />
+          {/* Keyed on the path so the entrance replays on navigation.
+              One wrapper covers every authenticated page. */}
+          <div key={location.pathname} className="animate-rise-in">
+            <Outlet />
+          </div>
         </main>
       </div>
 

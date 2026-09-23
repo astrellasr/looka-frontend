@@ -51,14 +51,14 @@ function RecommendationActions({
             type="button"
             onClick={onSave}
             disabled={saved}
-            className={`flex h-11 w-full items-center justify-center gap-2 rounded-control px-4 text-body font-medium transition-colors duration-150 ${
+            className={`flex h-11 w-full items-center justify-center gap-2 rounded-control px-4 text-body font-medium transition duration-150 active:scale-[0.98] ${
               saved
                 ? 'bg-blush/40 text-primary-strong'
                 : 'bg-blush/20 text-primary-strong hover:bg-blush/35'
             }`}
           >
             {saved ? (
-              <HeartFilledIcon className="h-4 w-4" />
+              <HeartFilledIcon className="animate-pop h-4 w-4" />
             ) : (
               <HeartIcon className="h-4 w-4" aria-hidden="true" />
             )}
@@ -74,7 +74,7 @@ function RecommendationActions({
             type="button"
             onClick={onWearToday}
             disabled={worn}
-            className="flex h-11 w-full items-center justify-center gap-2 rounded-control bg-primary px-4 text-body font-medium text-white transition-colors duration-150 hover:bg-primary-strong disabled:bg-primary/50"
+            className="flex h-11 w-full items-center justify-center gap-2 rounded-control bg-primary px-4 text-body font-medium text-white transition duration-150 hover:bg-primary-strong active:scale-[0.98] disabled:bg-primary/50 disabled:active:scale-100"
           >
             <CheckIcon className="h-4 w-4" aria-hidden="true" />
             {worn ? 'Added' : 'Wear Today'}

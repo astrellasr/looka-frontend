@@ -22,7 +22,7 @@ function QuickAccessCard({ to, icon: Icon, title, meta, accent = 'blush' }) {
     >
       <span
         aria-hidden="true"
-        className={`flex h-11 w-11 items-center justify-center rounded-control ${ACCENTS[accent]}`}
+        className={`flex h-11 w-11 items-center justify-center rounded-control transition-transform duration-200 group-hover:scale-105 ${ACCENTS[accent]}`}
       >
         <Icon className="h-5 w-5" />
       </span>

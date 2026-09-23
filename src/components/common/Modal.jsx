@@ -34,7 +34,7 @@ function Modal({ title, onClose, children, className = '' }) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-end justify-center bg-ink/25 backdrop-blur-[2px] sm:items-center sm:p-6"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6"
       onMouseDown={(e) => {
         if (!panelRef.current?.contains(e.target)) onClose()
       }}
@@ -44,7 +44,7 @@ function Modal({ title, onClose, children, className = '' }) {
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
-        className={`animate-scale-in max-h-[92vh] w-full overflow-y-auto rounded-t-card bg-surface p-6 shadow-raised sm:max-w-md sm:rounded-card ${className}`}
+        className={`animate-scale-in max-h-[92vh] w-full overflow-y-auto rounded-card border border-line bg-surface p-6 shadow-raised sm:max-w-md ${className}`}
       >
         <div className="flex items-start justify-between gap-4">
           <h2 id={titleId} className="text-section">

@@ -44,7 +44,7 @@ function ClothingGrid({
   }
 
   return (
-    <div className="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-4">
+    <div className="stagger grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-4">
       {items.map((item) => (
         <ClothingCard
           key={item.id}

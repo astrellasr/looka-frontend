@@ -19,8 +19,10 @@ const ACCENTS = {
 function OutfitItem({ item, locked = false, onToggleLock }) {
   return (
     <article
-      className={`overflow-hidden rounded-card border bg-surface transition-colors duration-200 ${
-        locked ? 'border-primary/50' : 'border-line'
+      className={`overflow-hidden rounded-card border bg-surface transition duration-200 ${
+        locked
+          ? 'border-primary/50 ring-1 ring-primary/25'
+          : 'border-line hover:-translate-y-0.5 hover:shadow-card'
       }`}
     >
       <div
@@ -41,7 +43,7 @@ function OutfitItem({ item, locked = false, onToggleLock }) {
           aria-label={
             locked ? `Unlock ${item.name}` : `Lock ${item.name} into this look`
           }
-          className={`absolute right-2.5 top-2.5 flex h-8 w-8 items-center justify-center rounded-full transition-colors duration-150 ${
+          className={`absolute right-2.5 top-2.5 flex h-8 w-8 items-center justify-center rounded-full transition duration-150 hover:scale-110 active:scale-95 ${
             locked
               ? 'bg-primary text-white'
               : 'bg-surface/85 text-ink-soft hover:bg-surface hover:text-ink'

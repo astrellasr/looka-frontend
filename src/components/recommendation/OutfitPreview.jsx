@@ -9,7 +9,7 @@ import OutfitItem from './OutfitItem'
  */
 function OutfitPreview({ items = [], lockedItemId, onToggleLock }) {
   return (
-    <div className="flex flex-col items-stretch gap-2 sm:flex-row sm:items-start sm:gap-3">
+    <div className="stagger flex flex-col items-stretch gap-2 sm:flex-row sm:items-start sm:gap-3">
       {items.map((item, index) => (
         <Fragment key={item.id}>
           <div className="min-w-0 sm:flex-1">

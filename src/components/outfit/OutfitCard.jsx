@@ -58,7 +58,7 @@ function OutfitCard({ look, onOpen, onToggleFavorite }) {
             ? `Remove ${look.name} from favorites`
             : `Add ${look.name} to favorites`
         }
-        className={`absolute right-3 top-3 z-10 flex h-9 w-9 items-center justify-center rounded-full shadow-card transition-colors duration-150 ${
+        className={`absolute right-3 top-3 z-10 flex h-9 w-9 items-center justify-center rounded-full shadow-card transition duration-150 hover:scale-110 active:scale-95 ${
           look.favorite
             ? 'bg-surface text-primary'
             : 'bg-surface/90 text-ink-soft hover:bg-surface hover:text-primary-strong'

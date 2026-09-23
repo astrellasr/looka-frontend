@@ -27,7 +27,7 @@ function RecommendationResult({
     .join(' · ')
 
   return (
-    <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_22rem]">
+    <div className="animate-rise-in grid gap-5 xl:grid-cols-[minmax(0,1fr)_22rem]">
       <section className="rounded-card border border-line bg-surface p-6 shadow-card sm:p-8">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div className="min-w-0">
